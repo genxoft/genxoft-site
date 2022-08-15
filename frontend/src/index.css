@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  background-color: #ffffff;
+  color: #ff7f00;
+  font-family: "Roboto Mono", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+code {
+  font-family: "Roboto Mono", source-code-pro, monospace;
+}

@@ -1,0 +1,6 @@
+/.idea
+.DS_Store
+/genxoft-server
+/output
+/build-counter.txt
+/web/*
