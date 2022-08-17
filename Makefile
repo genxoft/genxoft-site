@@ -31,12 +31,16 @@ build-backend:
 	@echo "> Building the backend ..."
 	@go build -o ${BINARY_NAME} ${LDFLAGS} ./cmd/webserver/main.go
 
+.PHONY: create_artifact
+create_artifact:
+	./build/create_artifact.sh ${VERSION}
+
 .PHONY: run
 run:
 	./${BINARY_NAME}
 
 .PHONY: build
-build: build-inc dep-client build-client dep-backend build-backend
+build: build-inc dep-client build-client dep-backend build-backend create_artifact
 
 .PHONY: clean
 clean:
@@ -49,5 +53,7 @@ test:
 .PHONY: test_coverage
 test_coverage:
 	go test -v -race ./... -coverprofile=coverage.out
+
+
 
 .DEFAULT_GOAL := build

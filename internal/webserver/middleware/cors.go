@@ -10,7 +10,7 @@ func CORS(mode string, methods []string) func(http.Handler) http.Handler {
 	if mode == "dev" {
 		o = handlers.AllowedOrigins([]string{"*"})
 	} else {
-		o = handlers.AllowedOrigins([]string{"*"})
+		o = handlers.AllowedOrigins([]string{"https://genxoft.dev"})
 	}
 	return handlers.CORS(
 		o,

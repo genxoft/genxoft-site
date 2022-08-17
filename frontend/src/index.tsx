@@ -19,9 +19,7 @@ registerCacheSw();
 //registerMessagesSw();
 
 if (firebaseApp !== null) {
-    console.log(firebaseApp);
     const messaging = getMessaging(firebaseApp);
-    console.log(messaging);
     onMessage(messaging, (payload) => {
         console.log('Message received. ', payload);
         // TODO: show message

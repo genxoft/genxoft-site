@@ -61,7 +61,6 @@ export function Home() {
     const subscribeNotifications = () => {
         getMessagingToken((token) => {
             const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            console.log(token);
             ApiClient.post('/fcm-token', {
                 token,
                 timezone: timezone,

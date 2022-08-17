@@ -3,7 +3,7 @@ import {ApiBase} from "../config/api";
 
 const ApiClient: AxiosInstance = axios.create({
     baseURL: ApiBase,
-    timeout: 15
+    timeout: 5000
 });
 
 export default ApiClient;
