@@ -1,26 +1,31 @@
 #!/usr/bin/env sh
 
-temp_dir="./genxoft.dev"
+BUILD_MODE=${1}
 
-if [ -f "$temp_dir" ] ; then
-    rm "$temp_dir"
+TEMP_DIR="./genxoft-site-${BUILD_MODE}"
+
+if [ -f "$TEMP_DIR" ] ; then
+    rm "$TEMP_DIR"
 fi
 
-mkdir ${temp_dir}
-cp ./genxoft-server ${temp_dir}/genxoft-server
+mkdir ${TEMP_DIR}
+cp ./genxoft-server ${TEMP_DIR}/genxoft-server
 
-mkdir ${temp_dir}/web
-cp -R ./web/* ${temp_dir}/web
+mkdir ${TEMP_DIR}/web
+cp -R ./web/* ${TEMP_DIR}/web
 
-mkdir ${temp_dir}/migrations
-cp -R ./migrations/* ${temp_dir}/migrations
+mkdir ${TEMP_DIR}/migrations
+cp -R ./migrations/* ${TEMP_DIR}/migrations
 
 
-mkdir ${temp_dir}/data
-mkdir ${temp_dir}/data/files
+mkdir ${TEMP_DIR}/data
+mkdir ${TEMP_DIR}/data/files
 
 rm genxoft-site_${1}.tar.gz
 
-tar -czvf genxoft-site_${1}.tar.gz ${temp_dir}/*
+tar -czvf genxoft-site_${2}-${1}.tar.gz ${TEMP_DIR}/*
 
-rm -rf ${temp_dir}
+rm -rf ${TEMP_DIR}
+
+echo "Created artifact ${VERSION}-${BUILD_MODE} build: ${RELEASE_ID}"
+echo "genxoft-site_${2}-${1}.tar.gz"

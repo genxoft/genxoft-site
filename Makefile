@@ -1,15 +1,19 @@
 BINARY_NAME=genxoft-server
 WEBAPP_DIST=./web
 BUILD_COUNTER_FILE=build-counter.txt
+BUILD_MODE=$(mode)
+ifeq ($(mode),)
+	BUILD_MODE="prod"
+endif
 
-VERSION=$$(git describe --tags)
+VERSION=$$(git describe --tags --abbrev=0)
 RELEASE_ID=`cat ${BUILD_COUNTER_FILE}`
-LDFLAGS=-ldflags "-w -s -X main.Version=${VERSION} -X main.ReleaseId=${RELEASE_ID} -X main.Mode=prod"
+LDFLAGS=-ldflags "-w -s -X main.Version=${VERSION} -X main.ReleaseId=${RELEASE_ID} -X main.Mode=${BUILD_MODE}"
 
 .PHONY: build-inc
 build-inc:
 	./build/incbuild.sh ${BUILD_COUNTER_FILE}
-	echo "${VERSION} build: ${RELEASE_ID}"
+	@echo "${VERSION} build: ${RELEASE_ID}"
 
 .PHONY: dep-client
 dep-client:
@@ -33,7 +37,7 @@ build-backend:
 
 .PHONY: create_artifact
 create_artifact:
-	./build/create_artifact.sh ${VERSION}
+	./build/create_artifact.sh ${BUILD_MODE} ${VERSION}
 
 .PHONY: run
 run:
