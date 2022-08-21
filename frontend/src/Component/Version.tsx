@@ -5,6 +5,7 @@ export default function Version() {
 
     const version = process.env.REACT_APP_VERSION == undefined ? 'dev' : process.env.REACT_APP_VERSION;
     const build = process.env.REACT_APP_BUILD == undefined ? 'dev' : process.env.REACT_APP_BUILD;
+    const build_mode = process.env.REACT_APP_BUILD_MODE == undefined ? 'dev' : process.env.REACT_APP_BUILD_MODE;
 
     const VersionSign = styled('span')(
         () => `
@@ -17,7 +18,7 @@ export default function Version() {
             display: 'flex',
             justifyContent: 'right',
         }}>
-            <VersionSign>{version} Build: {build}</VersionSign>
+            <VersionSign>{version}-{build_mode} Build: {build}</VersionSign>
         </Box>
     )
 }

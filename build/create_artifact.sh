@@ -4,6 +4,8 @@ BUILD_MODE=${1}
 
 TEMP_DIR="./genxoft-site-${BUILD_MODE}"
 
+ARTIFACT_NAME="genxoft-site_${2}-${1}.tar.gz"
+
 if [ -f "$TEMP_DIR" ] ; then
     rm "$TEMP_DIR"
 fi
@@ -21,11 +23,11 @@ cp -R ./migrations/* ${TEMP_DIR}/migrations
 mkdir ${TEMP_DIR}/data
 mkdir ${TEMP_DIR}/data/files
 
-rm genxoft-site_${1}.tar.gz
+rm ${ARTIFACT_NAME}
 
-tar -czvf genxoft-site_${2}-${1}.tar.gz ${TEMP_DIR}/*
+tar -czvf ${ARTIFACT_NAME} ${TEMP_DIR}/*
 
 rm -rf ${TEMP_DIR}
 
 echo "Created artifact ${VERSION}-${BUILD_MODE} build: ${RELEASE_ID}"
-echo "genxoft-site_${2}-${1}.tar.gz"
+echo "${ARTIFACT_NAME}"

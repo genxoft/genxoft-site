@@ -6,7 +6,7 @@ ifeq ($(mode),)
 	BUILD_MODE="prod"
 endif
 
-VERSION=$$(git describe --tags --abbrev=0)
+VERSION=`git describe --tags --abbrev=0`
 RELEASE_ID=`cat ${BUILD_COUNTER_FILE}`
 LDFLAGS=-ldflags "-w -s -X main.Version=${VERSION} -X main.ReleaseId=${RELEASE_ID} -X main.Mode=${BUILD_MODE}"
 
@@ -28,7 +28,7 @@ dep-backend:
 .PHONY: build-client
 build-client:
 	@echo "> Building the client ..."
-	REACT_APP_VERSION=${VERSION} REACT_APP_BUILD=${RELEASE_ID} BUILD_PATH=./../${WEBAPP_DIST} npm --prefix ./frontend run build
+	REACT_APP_VERSION=${VERSION} REACT_APP_BUILD=${RELEASE_ID} REACT_APP_BUILD_MODE=${BUILD_MODE} BUILD_PATH=./../${WEBAPP_DIST} npm --prefix ./frontend run build
 
 .PHONY: build-backend
 build-backend:
